@@ -13,7 +13,7 @@ sudo systemctl stop hostapd
 # Configure a static IP
 
 if ! grep -q '^interface wlan0$' /etc/dhcpcd.conf; then
-  sudo cat << EOD >> /etc/dhcpcd.conf
+  sudo tee -a /etc/dhcpcd.conf > /dev/null << EOD
 
 # static ip for PortPi
 interface wlan0
@@ -28,7 +28,7 @@ sudo service dhcpcd restart
 # Configure DHCP server
 
 sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.bak
-sudo cat << EOD > /etc/dnsmasq.conf
+sudo tee /etc/dnsmasq.conf > /dev/null << EOD
 interface=wlan0
   dhcp-range=192.168.3.15,192.168.3.92,255.255.255.0,24h
 EOD
@@ -38,7 +38,7 @@ EOD
 if [ -f /etc/hostapd/hostapd.conf ]; then
   sudo mv /etc/hostapd/hostapd.conf /etc/hostapd/hostapd.conf.bak
 fi
-sudo cat << EOD > /etc/hostapd/hostapd.conf
+sudo tee /etc/hostapd/hostapd.conf > /dev/null << EOD
 interface=wlan0
 driver=nl80211
 ssid=PortPi
