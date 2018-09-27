@@ -86,6 +86,7 @@ cd /home/pi/PortPi
 git clone https://github.com/portpi/server.git
 cd server
 npm install
+npm run build
 cd -
 
 git clone https://github.com/portpi/server-startup.git
